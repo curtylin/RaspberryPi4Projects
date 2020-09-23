@@ -1,6 +1,20 @@
 from datetime import datetime, date
 from sense_hat import SenseHat
 
+def logTemperature():
+    sense = SenseHat()
+
+    Ptemp = sense.get_temperature_from_pressure()
+    Htemp = sense.get_temperature_from_humidity()
+
+    print("Temperature (from thermometer): %s C" % sense.temperature)
+    print("Temperature (from pressure): %s C" % Ptemp)
+    print("Temperature (from humidity): %s C" % Htemp)
+
+    writeLog.write('[' + str(datetime.now()) + '] Current Temp(from pressure): ' + str(Ptemp) + ' C \n')
+    writeLog.write('[' + str(datetime.now()) + '] Current Temp(from humidity): ' + str(Htemp) + ' C \n')
+
+
 userWantsAutomaticTemperatureTracking = True
 tempCheckRecurrance = 60
 
@@ -26,27 +40,9 @@ writeLog.write('[' + str(datetime.now()) + '] userWantsAutomaticTemperatureTrack
 
 if userWantsAutomaticTemperatureTracking:
     while userWantsAutomaticTemperatureTracking:
-        sense = SenseHat()
-
-        Ptemp = sense.get_temperature_from_pressure()
-        Htemp = sense.get_temperature_from_humidity()
-
-        print("Temperature (from thermometer): %s C" % sense.temperature)
-        print("Temperature (from pressure): %s C" % Ptemp)
-        print("Temperature (from humidity): %s C" % Htemp)
-
-        writeLog.write('[' + str(datetime.now()) + '] Current Temp(from pressure): ' + str(Ptemp) + ' C \n')
-        writeLog.write('[' + str(datetime.now()) + '] Current Temp(from humidity): ' + str(Htemp) + ' C \n')
+        logTemperature()
         time.sleep(tempCheckRecurrance)
 else:
-    sense = SenseHat()
-    Ptemp = sense.get_temperature_from_pressure()
-    Htemp = sense.get_temperature_from_humidity()
-
-    print("Temperature (from thermometer): %s C" % sense.temperature)
-    print("Temperature (from pressure): %s C" % Ptemp)
-    print("Temperature (from humidity): %s C" % Htemp)
-    writeLog.write('[' + str(datetime.now()) + '] Current Temp(from pressure): ' + str(Ptemp) + ' C \n')
-    writeLog.write('[' + str(datetime.now()) + '] Current Temp(from humidity): ' + str(Htemp) + ' C \n')
+    logTemperature()
 
 writeLog.close()
