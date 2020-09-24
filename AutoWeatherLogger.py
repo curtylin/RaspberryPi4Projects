@@ -1,5 +1,6 @@
 from datetime import datetime, date
-from bme280 import BME280
+from bme280 import BME280       #Enviro+'s Temperature sensor library.
+from pms5003 import PMS5003, ReadTimeoutError #Enviro+'s Particulates sensor library.
 import logging
 
 try:
@@ -7,30 +8,28 @@ try:
 except ImportError:
     from smbus import SMBus
 
-global currentDay, userWantsAutomaticTemperatureTracking, tempCheckRecurrance, writeLog
-
-bus = SMBus(1)
-bme280 = BME280(i2c_dev=bus)
-
-
+global currentDay, userWantsAutomaticTemperatureTracking, tempCheckRecurrance, writeLog, bme280, pms5003
 
 def logWeather():
     temperature = bme280.get_temperature()
     pressure = bme280.get_pressure()
     humidity = bme280.get_humidity()
+    particulateReading = pms5003.read()
+    except ReadTimeoutError:
+        pms5003 = PMS5003()
 
-    print('[' + str(datetime.now()) + '] \t\t Temperature (*C): ' + str(temperature) + '\t\t Pressure (hPa): ' + str(pressure) + '\t\t Humidity (%): ' + str(humidity) + '\n')
+    print('[' + str(datetime.now()) + '] \t\t Temperature (*C): ' + str(temperature) + '\t\t Pressure (hPa): ' + str(pressure) + '\t\t Humidity (%): ' + str(humidity) + '\t\t Particulates : ' + str(particulateReading) + '\n')
     # writeLog.write('[' + str(datetime.now()) + '] \t\t' + str(temperature) + '\t\t' + str(pressure) + '\t\t' + str(humidity) + '\n')
-    logging.info(str(temperature) + '\t\t' str(pressure) + '\t\t' +  str(humidity))
+    logging.info(str(temperature) + '\t\t' str(pressure) + '\t\t' +  str(humidity) + '\t\t' + str(particulateReading))
 
 def generateLogFile():
     # writeLogFileName = 'AutoWeatherLog' + str(date.today()) + '.log'
     # writeLog = open(writeLogFileName, 'w', encoding='cp1252')
     # writeLog.write('[' + str(datetime.now()) + '] Started logging from script. \n')
     # writeLog.write('[ Current Time ] \t\t Temperature (*C): \t\t Pressure (hPa): \t\t Humidity (%): \n')
-    logging.basicConfig(format='%(asctime)s: %(message)s', filename='AutoWeatherLog' + str(date.today()) + '.log')
+    logging.basicConfig(format='%(asctime)s: %(message)s', filename='AutoWeatherLog' + str(date.today()) + '.log', level=logging.INFO)
     logging.info('Started logging from script.')
-    logging.info('Temperature (*C): \t\t Pressure (hPa): \t\t Humidity (%): ')
+    logging.info('Temperature (*C): \t\t Pressure (hPa): \t\t Humidity (%): \t\t Particulates: ')
 
 def userSurvey():
     userWantsAutomaticTemperatureTracking = input("Do you want continuous temperature tracking? (Y/N): ")
@@ -48,10 +47,13 @@ def userSurvey():
     logging.info('userWantsAutomaticTemperatureTracking: ' + str(userWantsAutomaticTemperatureTracking))
 
 
-
+# Inital setup for the script includes automatic temp tracking, setup of sensors, logging, etc.
 userWantsAutomaticTemperatureTracking = True
 tempCheckRecurrance = 60
 currentDay = str(date.today())
+bus = SMBus(1)
+bme280 = BME280(i2c_dev=bus)
+pms5003 = PMS5003()
 
 generateLogFile()
 userSurvey()
