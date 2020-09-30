@@ -59,8 +59,8 @@ APIKey = ''
 generateLogFile()
 userSurvey()
 
-lat = 40.765031
-lon = -111.849385
+lat = str(40.765031)
+lon = str(-111.849385)
 
 if userWantsAutomaticTemperatureTracking:
     while userWantsAutomaticTemperatureTracking:
