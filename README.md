@@ -32,13 +32,13 @@ pi@RaspberryPi:  python3 AutoWeatherLogger.py
 
  ### Key Features:
  -  Returns a single listing in a line that includes the following:
-  - Name
-  - Sex
-  - Breed
-  - Weight
-  - Age (in months)
-  - Availability
-  - price
+ -- Name
+ -- Sex
+ -- Breed
+ -- Weight
+ -- Age (in months)
+ -- Availability
+ -- price
   
  
  ### How To Use:
