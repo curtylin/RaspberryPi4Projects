@@ -43,6 +43,7 @@ def userSurvey():
     # writeLog.write('[' + str(datetime.now()) + '] userWantsAutomaticTemperatureTracking: ' + str(userWantsAutomaticTemperatureTracking) + '\n')
     logging.info('userWantsAutomaticTemperatureTracking: ' + str(userWantsAutomaticTemperatureTracking))
     APIKey = str(input("Please give API Key for openWeatherMap: "))
+    logging.info('User Provided API Key: ' + str(userWantsAutomaticTemperatureTracking))
 
 
 
