@@ -8,7 +8,7 @@ global currentDay, userWantsAutomaticTemperatureTracking, tempCheckRecurrance
 global lat, lon, APIKey
 
 def logWeather():
-    response = requests.get('https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&appid=%s' % lat, lon, APIKey)
+    response = requests.get('https://api.openweathermap.org/data/2.5/onecall?lat={0}&lon={1}&appid={2}' % lat, lon, APIKey)
     responseObj = json.loads(response)
     
     temperature = responseObj.current.temp
