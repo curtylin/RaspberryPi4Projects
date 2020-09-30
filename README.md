@@ -39,10 +39,10 @@ pi@RaspberryPi:  python3 AutoWeatherLogger.py
  -- Age (in months)
  -- Availability
  -- price
-  
- 
+ - Can be run daily using conjob found here: https://www.raspberrypi.org/documentation/linux/usage/cron.md
+
  ### How To Use:
   ```bash
-pi@RaspberryPi:  python3 UtahHumaneSociety.py
+pi@RaspberryPi:  python3 UtahHumaneSocietyScraper.py
 ```
 

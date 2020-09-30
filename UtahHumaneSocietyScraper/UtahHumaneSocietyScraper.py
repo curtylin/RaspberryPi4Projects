@@ -43,6 +43,8 @@ for job_element in job_elements:
 outputFileName = 'UtahHumanParsed'+ str(date.today()) +'.txt'
 output = open(outputFileName, 'w', encoding='cp1252')
 output.write('UP TO DATE AS OF: ' + str(datetime.now())+ '\n')
+output.write('Listing: \t\t\tName: \t\t\tSex: \t\t\tBreed: \t\t\tWeight: \t\t\tAge(Months): \t\t\tAvailability: \t\t\tPrice: \n')
+
 
 for listing in listings:
     URL = 'https://www.utahhumane.org/listing/' + str(listing)
@@ -70,6 +72,6 @@ for listing in listings:
     availability = availabilty_element.text.split()[1]
     price = get_price(price_element)
     availableAnimals.append((name, sex, breed, weight, age, availability, price))
-    output.write('Name: ' + name + '\tSex: ' + sex + '\tBreed: ' + breed + '\tWeight: ' + weight + '\tAge(Months): ' + age + '\tAvailability: ' + availability + '\tPrice: ' + price + '\n')
+    output.write(str(listing) + '\t\t\t' + name + '\t\t\t' + sex + '\t\t\t' + breed + '\t\t\t' + weight + '\t\\tt' + age + '\t\t\t' + availability + '\t\t\t' + price + '\n')
 
 output.close()
