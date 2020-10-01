@@ -22,9 +22,9 @@ def logWeather():
     temperature = responseObj["current"]["temp"]
     pressure = responseObj["current"]["pressure"]
     humidity = responseObj["current"]["humidity"]
+    weather = responseObj["current"]["weather"]["description"]
 
     print('[' + str(datetime.now()) + '] \tTemperature (*C): ' + str(temperature) + '\tPressure (hPa): ' + str(pressure) + '\tHumidity (%): ' + str(humidity) + '\n')
-    # # writeLog.write('[' + str(datetime.now()) + '] \t\t' + str(temperature) + '\t\t' + str(pressure) + '\t\t' + str(humidity) + '\n')
     logging.info(str(temperature) + '\t\t\t\t' + str(pressure) + '\t\t\t' +  str(humidity))
 
 def generateLogFile():
