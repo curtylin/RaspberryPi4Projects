@@ -1,0 +1,12 @@
+UP TO DATE AS OF: 2020-09-30 18:25:31.166459
+Listing: 	Name: 		Sex: 		Breed: 				Weight: 		Age(Months): 			Availability: 			Price: 
+6396		Alvin		Male		Chihuahua/Mix				8		72			AVAILABLE			150
+6347		Charley		Male		Retriever,ChocolateLabrador				73		132			AVAILABLE			0
+6348		Duke		Male		Retriever,BlackLabrador				69		132			AVAILABLE			0
+6067		Harold		Male		MixedBreed(Medium)				53		36			AVAILABLE			150
+6003		Hubble		Male		MixedBreed(Large)/Mix				63		70			AVAILABLE			0
+5957		Koji		Female		MixedBreed(Medium)				20		2			AVAILABLE			350
+6020		Nixon		Female		Pinscher,Doberman/Mix				45		60			AVAILABLE			150
+6006		Sampson		Male		Chihuahua				6.4		48			AVAILABLE			150
+6436		Sophia		Female		MixedBreed(Large)				lbs		36			AVAILABLE			150
+5951		Violet		Female		MixedBreed(Medium)/None				20		6			AVAILABLE			250
