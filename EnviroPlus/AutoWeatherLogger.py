@@ -24,7 +24,6 @@ def logWeather():
 def generateLogFile():
     logging.basicConfig(format='%(asctime)s: %(message)s', filename='AutoWeatherLog' + str(date.today()) + '.log', level=logging.INFO)
     logging.info('Started logging from script.')
-    logging.info('Temperature (*C): \t\t Pressure (hPa): \t\t Humidity (%): \t\t Particulates: ')
 
 def userSurvey():
     global userWantsAutomaticTemperatureTracking, tempCheckFrequency
@@ -32,18 +31,19 @@ def userSurvey():
     if userWantsAutomatic.lower() == 'y' or userWantsAutomatic.lower() == 'yes':
         userWantsAutomaticTemperatureTracking = True
         try:
-            tempCheckFrequency = float(input("How often do you want to check temperatures? (in seconds): "))
+            tempCheckFrequency = float(input("How often do you want to check temperatures? (in minutes): "))
         except:
-            tempCheckFrequency = float(input("Please give a valid number input in seconds: "))
-            logging.info('Script taking info every ' + str(tempCheckFrequency) + ' seconds.')
+            tempCheckFrequency = float(input("Please give a valid number input in minutes: "))
+            logging.info('Script taking info every ' + str(tempCheckFrequency) + ' minutes.')
     else:
         userWantsAutomaticTemperatureTracking = False
         logging.info('userWantsAutomaticTemperatureTracking: ' + str(userWantsAutomaticTemperatureTracking))
+    logging.info('Temperature (*C): \t\t Pressure (hPa): \t\t Humidity (%): \t\t Particulates: ')
 
 
 # Inital setup for the script includes automatic temp tracking, setup of sensors, logging, etc.
 userWantsAutomaticTemperatureTracking = True
-tempCheckFrequency = 60
+tempCheckFrequency = 5
 currentDay = str(date.today())
 bus = SMBus(1)
 bme280 = BME280(i2c_dev=bus)
@@ -58,7 +58,7 @@ if userWantsAutomaticTemperatureTracking:
             logging.FileHandler.close()
             generateLogFile()
         logWeather()
-        time.sleep(tempCheckFrequency)
+        time.sleep(tempCheckFrequency*60)
 else:
     logWeather()
 
