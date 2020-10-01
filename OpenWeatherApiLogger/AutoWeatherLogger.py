@@ -15,6 +15,8 @@ currentDay = str(date.today())
 def logWeather():
     URL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' +str(lat) + '&lon=' + str(lon) +  '&appid=' + APIKey + '&units=metric'
     response = requests.get(URL)
+    if not response.ok:
+        print ('HTTP Response: ' , response.status_code , response.reason)
     responseObj = response.json()
     
     temperature = responseObj["current"]["temp"]
@@ -43,15 +45,14 @@ def userSurvey():
     else:
         userWantsAutomaticTemperatureTracking = False
         logging.info('userWantsAutomaticTemperatureTracking: ' + str(userWantsAutomaticTemperatureTracking))
-    #APIKey = str(input("Please give API Key for openWeatherMap: "))
-    #logging.info('User Provided API Key: ' + str(APIKey))
+    APIKey = str(input("Please give API Key for openWeatherMap: "))
+    logging.info('User Provided API Key: ' + str(APIKey))
 
 
 
-APIKey = '7474a222b6f393d616e11301d843b04d'
+APIKey = ''
 generateLogFile()
 userSurvey()
-print(tempCheckFrequency)
 
 lat = '40.765031'
 lon = '-111.849385'
