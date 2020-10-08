@@ -14,7 +14,8 @@ def logWeather():
     temperature = bme280.get_temperature()
     pressure = bme280.get_pressure()
     humidity = bme280.get_humidity()
-    particulateReading = pms5003.read()
+    try
+        particulateReading = pms5003.read()
     except ReadTimeoutError:
         pms5003 = PMS5003()
 
