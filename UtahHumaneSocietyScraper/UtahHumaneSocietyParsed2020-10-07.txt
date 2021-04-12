@@ -1,0 +1,8 @@
+UP TO DATE AS OF: 2020-10-07 12:19:25.251080
+Listing: 	Name: 		Sex: 		Breed: 				Weight: 		Age(Months): 			Availability: 			Price: 
+6361		Boone		Male		MixedBreed(Medium)				22		36			AVAILABLE			150
+6278		Brittany		Female		MixedBreed(Medium)				60		12			AVAILABLE			150
+6318		Cerberus		Male		Rottweiler/Retriever,BlackLabrador				95		24			AVAILABLE			150
+6600		Milo		Male		MixedBreed(Medium)				lbs		49			AVAILABLE			150
+6574		Miranda		Female		Poodle,Miniature/Mix				15.8		12			AVAILABLE			150
+6608		Montoya		Male		MixedBreed(Medium)				69		12			AVAILABLE			150

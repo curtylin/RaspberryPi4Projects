@@ -2,6 +2,8 @@ from datetime import datetime, date
 from bme280 import BME280       #Enviro+'s Temperature sensor library.
 from pms5003 import PMS5003, ReadTimeoutError #Enviro+'s Particulates sensor library.
 import logging
+import time
+from CompensatedTemp import get_compensated_temperature
 
 try:
     from smbus2 import SMBus
@@ -11,16 +13,17 @@ except ImportError:
 global currentDay, writeLog, bme280, pms5003
 
 def logWeather():
-    temperature = bme280.get_temperature()
+    global pms5003
+    temperature = get_compensated_temperature(1.5)
     pressure = bme280.get_pressure()
     humidity = bme280.get_humidity()
-    try
+    try:
         particulateReading = pms5003.read()
     except ReadTimeoutError:
         pms5003 = PMS5003()
 
-    print('[' + str(datetime.now()) + ']: Temperature (*C): ' + str(temperature) + '\tPressure (hPa): ' + str(pressure) + '\tHumidity (%): ' + str(humidity) + '\tParticulates : ' + str(particulateReading) + '\n')
-    logging.info(str(temperature) + '\t\t\t\t' str(pressure) + '\t\t\t' +  str(humidity) + '\t\t' + str(particulateReading))
+    print('[' + str(datetime.now()) + ']: Temperature (*C): ' + str(temperature) + '\tPressure (hPa): ' + str(pressure) + '\tHumidity (%): ' + str(humidity) + '\nParticulates : ' + str(particulateReading) + '\n')
+    logging.info('[' + str(datetime.now()) + ']: Temperature (*C): ' + str(temperature) + '\tPressure (hPa): ' + str(pressure) + '\tHumidity (%): ' + str(humidity) + '\nParticulates : ' + str(particulateReading) + '\n')
 
 def generateLogFile():
     logging.basicConfig(format='%(asctime)s: %(message)s', filename='AutoWeatherLog' + str(date.today()) + '.log', level=logging.INFO)
@@ -29,7 +32,7 @@ def generateLogFile():
 def userSurvey():
     global userWantsAutomaticTemperatureTracking, tempCheckFrequency
     userWantsAutomaticTemperatureTracking = input("Do you want continuous temperature tracking? (Y/N): ")
-    if userWantsAutomatic.lower() == 'y' or userWantsAutomatic.lower() == 'yes':
+    if userWantsAutomaticTemperatureTracking.lower() == 'y' or userWantsAutomaticTemperatureTracking.lower() == 'yes':
         userWantsAutomaticTemperatureTracking = True
         try:
             tempCheckFrequency = float(input("How often do you want to check temperatures? (in minutes): "))
@@ -39,7 +42,6 @@ def userSurvey():
     else:
         userWantsAutomaticTemperatureTracking = False
         logging.info('userWantsAutomaticTemperatureTracking: ' + str(userWantsAutomaticTemperatureTracking))
-    logging.info('Temperature (*C): \t\t Pressure (hPa): \t\t Humidity (%): \t\t Particulates: ')
 
 
 # Inital setup for the script includes automatic temp tracking, setup of sensors, logging, etc.

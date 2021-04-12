@@ -41,7 +41,7 @@ for job_element in job_elements:
 # At this point, we have all of the listings on the Humane Society of Utah.
 
 outputFileName = 'UtahHumaneSocietyParsed'+ str(date.today()) +'.txt'
-output = open(outputFileName, 'w', encoding='cp1252')
+output = open(outputFileName, 'w')
 output.write('UP TO DATE AS OF: ' + str(datetime.now())+ '\n')
 output.write('Listing: \tName: \t\tSex: \t\tBreed: \t\t\t\tWeight: \t\tAge(Months): \t\t\tAvailability: \t\t\tPrice: \n')
 
