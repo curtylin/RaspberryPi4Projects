@@ -162,7 +162,7 @@ tempInfo = getTemp()
 try:
     while True:
         currentTime = datetime.now()
-        if ((currentTime - lastUpdate).total_seconds() / 60) >= 10:
+        if ((currentTime - lastUpdate).total_seconds() / 60) >= 15:
             tempInfo = getTemp()
             lastUpdate = currentTime
         displayParticulates()
