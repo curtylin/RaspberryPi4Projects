@@ -75,7 +75,6 @@ def displayThreeLines(lineOne, lineTwo, lineThree, bgColour=(0, 0, 0), textColou
 
 
 def displayParticulates():
-    
     PMmessage = "PM2.5 ug/m3: {}".format(pms5003.read().pm_ug_per_m3(2.5))
     TimeMessage = "Last Update: {}".format(datetime.now().strftime("%H:%M"))
     displayTwoLines(PMmessage, TimeMessage)
@@ -102,9 +101,7 @@ def getTemp():
     return temperature, weather, alerts
 
 
-def displayWeather():
-    global draw, img, font, HEIGHT, WIDTH, back_colour, text_colour
-    tempInfo = getTemp()
+def displayWeather(temperature, weather, alerts):
 
     alerts = tempInfo[2]
     if alerts != []:
@@ -159,10 +156,16 @@ PMfont = ImageFont.truetype(UserFont, font_size)
 bus = SMBus(1)
 pms5003 = PMS5003()
 
+lastUpdate = datetime.now()
+tempInfo = getTemp()
+
 try:
     while True:
+        currentTime = datetime.now()
+        if ((currentTime - lastUpdate).total_seconds() / 60) > 5:
+            tempInfo = getTemp()
         displayParticulates()
-        displayWeather()
+        displayWeather(tempInfo[0], tempInfo[1], tempInfo[2])
     # Turn off backlight on control-c
 except KeyboardInterrupt:
     disp.set_backlight(0)
