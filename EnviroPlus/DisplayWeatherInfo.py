@@ -98,8 +98,8 @@ def getTemp():
 
 def displayWeather():
     global draw, img, font, HEIGHT, WIDTH, back_colour, text_colour
+    # tempInfo = getTemp()
     TimeMessage = "Last Update: {}".format(datetime.now().strftime("%H:%M"))
-    tempInfo = getTemp()
 
     # TempMessage = "Outside Temp: {}".format(tempInfo[0])
     TempMessage = "Outside Temp: {}".format(20)
@@ -108,9 +108,10 @@ def displayWeather():
     WeatherMessage = "Weather: {}".format("Sunny")
 
     displayThreeLines(WeatherMessage, TempMessage, TimeMessage)
-
-    if tempInfo[2] != []:
-        for alert in tempInfo[2]:
+    # alerts = tempInfo[2]
+    alerts = []
+    if alerts != []:
+        for alert in alerts:
             time.sleep(5)
             displayTwoLines("Weather Alert:", alert["event"], (255, 0, 0), (0, 0, 0))
 
