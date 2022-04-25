@@ -90,7 +90,7 @@ def getTemp():
     if not response.ok:
         print ('HTTP Response: ' , response.status_code , response.reason)
     responseObj = response.json()
-    temperature = responseObj["current"]["temp"]
+    temperature = int(responseObj["current"]["temp"])
     weather = responseObj["current"]["weather"][0]["main"]
 
     alerts = []
@@ -110,7 +110,7 @@ def displayWeather(temperature, weather, alerts):
             time.sleep(10)
     TimeMessage = "Last Update: {}".format(lastUpdate.strftime("%H:%M"))
 
-    TempMessage = "Outside Temp: {}".format(tempInfo[0])
+    TempMessage = "Outside Temp: {}°F".format(tempInfo[0])
     WeatherMessage = "Weather: {}".format(tempInfo[1])
     displayThreeLines(WeatherMessage, TempMessage, TimeMessage)
     time.sleep(30)
