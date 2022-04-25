@@ -72,9 +72,9 @@ def displayThreeLines(lineOne, lineTwo, lineThree, bgColour=(0, 0, 0), textColou
 
 def displayParticulates():
     
-    TimeMessage = "Last Update: {}".format(datetime.now().strftime("%H:%M"))
     PMmessage = "PM2.5 ug/m3: {}".format(pms5003.read().pm_ug_per_m3(2.5))
-    displayTwoLines(TimeMessage, PMmessage)
+    TimeMessage = "Last Update: {}".format(datetime.now().strftime("%H:%M"))
+    displayTwoLines(PMmessage, TimeMessage)
 
 
 def getTemp():
@@ -101,9 +101,11 @@ def displayWeather():
     TimeMessage = "Last Update: {}".format(datetime.now().strftime("%H:%M"))
     tempInfo = getTemp()
 
-    TempMessage = "Outside Temp: {}".format(tempInfo[0])
+    # TempMessage = "Outside Temp: {}".format(tempInfo[0])
+    TempMessage = "Outside Temp: {}".format(20)
 
-    WeatherMessage = "Weather: {}".format(tempInfo[1])
+    # WeatherMessage = "Weather: {}".format(tempInfo[1])
+    WeatherMessage = "Weather: {}".format("Sunny")
 
     displayThreeLines(WeatherMessage, TempMessage, TimeMessage)
 
