@@ -3,6 +3,7 @@ from bme280 import BME280       #Enviro+'s Temperature sensor library.
 from pms5003 import PMS5003, ReadTimeoutError #Enviro+'s Particulates sensor library.
 import logging
 import time
+from builtins import input
 from CompensatedTemp import get_compensated_temperature
 
 try:
