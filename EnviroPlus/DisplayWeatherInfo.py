@@ -42,13 +42,13 @@ def displayTwoLines(lineOne, lineTwo, bgColour=(0, 0, 0), textColour=(255, 255, 
 def displayThreeLines(lineOne, lineTwo, lineThree, bgColour=(0, 0, 0), textColour=(255, 255, 255)):
     global draw, img, font, pms5003, HEIGHT, WIDTH
     lineOnefont = ImageFont.truetype(UserFont, 15)
-    lineTwoFont = ImageFont.truetype(UserFont, 10)
-    lineThreeFont = ImageFont.truetype(UserFont, 5)
+    lineTwoFont = ImageFont.truetype(UserFont, 15)
+    lineThreeFont = ImageFont.truetype(UserFont, 10)
 
     size_x, size_y = draw.textsize(lineOne, lineOnefont)
     # Calculate text position
     x = (WIDTH - size_x) / 2
-    y = ((HEIGHT / 2) - (size_y / 2) ) - 20
+    y = ((HEIGHT / 2) - (size_y / 2) ) - 30
     # Draw background rectangle and write text.
     draw.rectangle((0, 0, 160, 80), bgColour)
 
@@ -57,7 +57,7 @@ def displayThreeLines(lineOne, lineTwo, lineThree, bgColour=(0, 0, 0), textColou
     size_x, size_y = draw.textsize(lineTwo, lineTwoFont)
     # Calculate text position
     x = (WIDTH - size_x) / 2
-    y = ((HEIGHT / 2) - (size_y / 2))
+    y = ((HEIGHT / 2) - (size_y / 2)) - 10
     draw.text((x, y), lineTwo, font=lineTwoFont, fill=textColour)
 
     size_x, size_y = draw.textsize(lineThree, lineThreeFont)
