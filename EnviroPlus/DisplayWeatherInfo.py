@@ -110,7 +110,7 @@ def displayWeather(temperature, weather, alerts):
             time.sleep(10)
     TimeMessage = "Last Update: {}".format(lastUpdate.strftime("%H:%M"))
 
-    TempMessage = "Outside Temp: {}\N{DEGREE SIGN}F".format(tempInfo[0])
+    TempMessage = "Outside Temp: {}\xb0F".format(tempInfo[0])
     WeatherMessage = "Weather: {}".format(tempInfo[1])
     displayThreeLines(WeatherMessage, TempMessage, TimeMessage)
     time.sleep(30)
