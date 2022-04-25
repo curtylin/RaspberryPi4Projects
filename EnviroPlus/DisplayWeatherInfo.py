@@ -85,7 +85,7 @@ def displayParticulates():
 def getTemp():
     lat = '40.765031'
     lon = '-111.849385'
-    URL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' +str(lat) + '&lon=' + str(lon) +  '&appid=' + APIKey + '&units=metric'
+    URL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' +str(lat) + '&lon=' + str(lon) +  '&appid=' + APIKey + '&units=imperial'
     response = requests.get(URL)
     if not response.ok:
         print ('HTTP Response: ' , response.status_code , response.reason)
