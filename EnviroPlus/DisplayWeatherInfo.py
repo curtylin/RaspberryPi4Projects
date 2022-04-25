@@ -21,7 +21,7 @@ APIKey = ""
 def displayTwoLines(lineOne, lineTwo, bgColour=(0, 0, 0), textColour=(255, 255, 255)):
     global draw, img, font, pms5003, HEIGHT, WIDTH
     lineOnefont = ImageFont.truetype(UserFont, 15)
-    lineTwoFont = ImageFont.truetype(UserFont, 10)
+    lineTwoFont = ImageFont.truetype(UserFont, 15)
 
     size_x, size_y = draw.textsize(lineOne, lineOnefont)
     # Calculate text position
@@ -43,7 +43,7 @@ def displayThreeLines(lineOne, lineTwo, lineThree, bgColour=(0, 0, 0), textColou
     global draw, img, font, pms5003, HEIGHT, WIDTH
     lineOnefont = ImageFont.truetype(UserFont, 15)
     lineTwoFont = ImageFont.truetype(UserFont, 15)
-    lineThreeFont = ImageFont.truetype(UserFont, 10)
+    lineThreeFont = ImageFont.truetype(UserFont, 15)
 
     size_x, size_y = draw.textsize(lineOne, lineOnefont)
     # Calculate text position
@@ -105,11 +105,11 @@ def displayWeather():
     TempMessage = "Outside Temp: {}".format(20)
 
     # WeatherMessage = "Weather: {}".format(tempInfo[1])
-    WeatherMessage = "Weather: {}".format("Sunny")
+    WeatherMessage = "Weather: {}".format("Partly Cloudy")
 
     displayThreeLines(WeatherMessage, TempMessage, TimeMessage)
     # alerts = tempInfo[2]
-    alerts = []
+    alerts = ["Alert 1", "Alert 2"]
     if alerts != []:
         for alert in alerts:
             time.sleep(5)
