@@ -75,6 +75,8 @@ def displayParticulates():
     PMmessage = "PM2.5 ug/m3: {}".format(pms5003.read().pm_ug_per_m3(2.5))
     TimeMessage = "Last Update: {}".format(datetime.now().strftime("%H:%M"))
     displayTwoLines(PMmessage, TimeMessage)
+    time.sleep(20)
+
 
 
 def getTemp():
@@ -98,22 +100,20 @@ def getTemp():
 
 def displayWeather():
     global draw, img, font, HEIGHT, WIDTH, back_colour, text_colour
-    # tempInfo = getTemp()
-    TimeMessage = "Last Update: {}".format(datetime.now().strftime("%H:%M"))
+    tempInfo = getTemp()
 
-    # TempMessage = "Outside Temp: {}".format(tempInfo[0])
-    TempMessage = "Outside Temp: {}".format(20)
-
-    # WeatherMessage = "Weather: {}".format(tempInfo[1])
-    WeatherMessage = "Weather: {}".format("Partly Cloudy")
-
-    displayThreeLines(WeatherMessage, TempMessage, TimeMessage)
-    # alerts = tempInfo[2]
-    alerts = ["Alert 1", "Alert 2"]
+    alerts = tempInfo[2]
     if alerts != []:
         for alert in alerts:
-            time.sleep(5)
             displayTwoLines("Weather Alert:", alert["event"], (255, 0, 0), (0, 0, 0))
+            time.sleep(10)
+    TimeMessage = "Last Update: {}".format(datetime.now().strftime("%H:%M"))
+
+    TempMessage = "Outside Temp: {}".format(tempInfo[0])
+    WeatherMessage = "Weather: {}".format(tempInfo[1])
+    displayThreeLines(WeatherMessage, TempMessage, TimeMessage)
+    time.sleep(30)
+
 
 
 
@@ -123,7 +123,6 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S')
 
 logging.info("""DisplayParticulates.py" LCD.
-
 Press Ctrl+C to exit!
 
 """)
@@ -151,20 +150,13 @@ draw = ImageDraw.Draw(img)
 # Text settings.
 font_size = 20
 PMfont = ImageFont.truetype(UserFont, font_size)
-
-
-
-updateFrequency = 1
 bus = SMBus(1)
 pms5003 = PMS5003()
 
 try:
     while True:
         displayParticulates()
-        time.sleep(updateFrequency * 30)
-
         displayWeather()
-        time.sleep(updateFrequency * 30)
     # Turn off backlight on control-c
 except KeyboardInterrupt:
     disp.set_backlight(0)
