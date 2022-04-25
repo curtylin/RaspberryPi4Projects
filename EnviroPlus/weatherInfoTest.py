@@ -2,6 +2,14 @@ import sys
 import requests
 import json
 
+global APIKey
+
+def readAPIKey():
+    f = open("apiKey.txt", "r")
+    APIKey = f.read()
+    f.close()
+    return APIKey
+
 def getWeather():
     lat = '40.765031'
     lon = '-111.849385'
@@ -20,6 +28,6 @@ def getWeather():
         pass
     return temperature, weather, alerts
 
+APIKey = readAPIKey()
 print(getWeather())
-
 sys.exit(0)

@@ -16,7 +16,11 @@ except ImportError:
 
 global APIKey
 
-APIKey = ""
+def readAPIKey():
+    f = open("apiKey.txt", "r")
+    APIKey = f.read()
+    f.close()
+    return APIKey
 
 def displayTwoLines(lineOne, lineTwo, bgColour=(0, 0, 0), textColour=(255, 255, 255)):
     global draw, img, font, pms5003, HEIGHT, WIDTH
@@ -136,6 +140,8 @@ disp = ST7735.ST7735(
     rotation=270,
     spi_speed_hz=10000000
 )
+
+APIKey = readAPIKey()
 
 disp.begin()
 
