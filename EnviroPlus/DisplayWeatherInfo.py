@@ -14,7 +14,7 @@ try:
 except ImportError:
     from smbus import SMBus
 
-global APIKey
+global APIKey, lastUpdate
 
 def readAPIKey():
     f = open("apiKey.txt", "r")
@@ -76,7 +76,7 @@ def displayThreeLines(lineOne, lineTwo, lineThree, bgColour=(0, 0, 0), textColou
 
 def displayParticulates():
     PMmessage = "PM2.5 ug/m3: {}".format(pms5003.read().pm_ug_per_m3(2.5))
-    TimeMessage = "Last Update: {}".format(datetime.now().strftime("%H:%M"))
+    TimeMessage = "Last Update: {}".format(lastUpdate.strftime("%H:%M"))
     displayTwoLines(PMmessage, TimeMessage)
     time.sleep(20)
 
@@ -108,7 +108,7 @@ def displayWeather(temperature, weather, alerts):
         for alert in alerts:
             displayTwoLines("Weather Alert:", alert["event"], (255, 0, 0), (0, 0, 0))
             time.sleep(10)
-    TimeMessage = "Last Update: {}".format(datetime.now().strftime("%H:%M"))
+    TimeMessage = "Last Update: {}".format(lastUpdate.strftime("%H:%M"))
 
     TempMessage = "Outside Temp: {}".format(tempInfo[0])
     WeatherMessage = "Weather: {}".format(tempInfo[1])
@@ -162,8 +162,9 @@ tempInfo = getTemp()
 try:
     while True:
         currentTime = datetime.now()
-        if ((currentTime - lastUpdate).total_seconds() / 60) > 5:
+        if ((currentTime - lastUpdate).total_seconds() / 60) >= 10:
             tempInfo = getTemp()
+            lastUpdate = currentTime
         displayParticulates()
         displayWeather(tempInfo[0], tempInfo[1], tempInfo[2])
     # Turn off backlight on control-c
